@@ -2,18 +2,34 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
+        
 class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(120), unique=True, nullable=False)
+   
+    id = db.Column(db.Integer, unique=True, primary_key=True)
+    username = db.Column(db.String(80), unique=True, nullable=False)
+    email = db.Column(db.String(80), unique=True, nullable=False)
     password = db.Column(db.String(80), unique=False, nullable=False)
-    is_active = db.Column(db.Boolean(), unique=False, nullable=False)
 
     def __repr__(self):
         return f'<User {self.email}>'
 
-    def serialize(self):
-        return {
-            "id": self.id,
-            "email": self.email,
-            # do not serialize the password, its a security breach
-        }
+    @classmethod
+    def signup(cls, email, password, username):
+        instance = cls(
+            username=username,
+            email=email,
+            password=password
+        )
+       
+
+    @classmethod
+    def login(cls, email, password):
+        user_data = cls.query.filter_by(
+            email=email
+        ).one_or_none()
+        if (not isinstance(user_data, cls)):
+            return user_data
+        if user_data.password == password:
+            return user_data
+        else:
+            return False
