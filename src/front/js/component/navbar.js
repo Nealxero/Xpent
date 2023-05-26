@@ -1,19 +1,31 @@
 import React from "react";
+import { useState } from "react";
+import { FaHome, FaUser, FaCog } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import "../../styles/sidebar.css";
 
 export const Navbar = () => {
-	return (
-		<nav className="navbar navbar-light bg-light">
-			<div className="container">
-				<Link to="/">
-					<span className="navbar-brand mb-0 h1">React Boilerplate</span>
-				</Link>
-				<div className="ml-auto">
-					<Link to="/demo">
-						<button className="btn btn-primary">Check the Context in action</button>
-					</Link>
-				</div>
-			</div>
-		</nav>
-	);
+  const [collapsed, setCollapsed] = useState(false);
+
+  const toggleCollapse = () => {
+    setCollapsed(!collapsed);
+  };
+
+  return (
+    <div className={`sidebar ${collapsed ? "collapsed" : ""}`}>
+      <button onClick={toggleCollapse}>Toggle Collapse</button>
+      <ul>
+        <li>
+          <FaHome /> {collapsed ? null : "Home"}
+        </li>
+        <li>
+          <FaUser /> {collapsed ? null : "Profile"}
+        </li>
+        <li>
+          <FaCog /> {collapsed ? null : "Settings"}
+        </li>
+        {/* Add more sidebar items */}
+      </ul>
+    </div>
+  );
 };

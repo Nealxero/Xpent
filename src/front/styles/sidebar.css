@@ -1,0 +1,22 @@
+.sidebar {
+    position: fixed;
+    right: 0;
+    top: 0;
+    height: 100vh;
+    width: 300px; /* Adjust the width as needed */
+    background-color: #f1f1f181; /* Set the background color */
+  }
+
+  .sidebar.collapsed {
+    width: 100px; /* Adjust the collapsed width as needed */
+  }
+  
+  .sidebar.collapsed ul {
+    
+  }
+  
+  .sidebar.collapsed button::after {
+    content: '>';
+    /* Add any necessary styling for the collapsed button icon */
+  }
+  
