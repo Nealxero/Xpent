@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { FaHome, FaUser, FaCog } from "react-icons/fa";
+import { FaHome, FaUser, FaCog, FaBars, FaTimes } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import "../../styles/sidebar.css";
 
@@ -12,20 +12,24 @@ export const Navbar = () => {
   };
 
   return (
-    <div className={`sidebar ${collapsed ? "collapsed" : ""}`}>
-      <button onClick={toggleCollapse}>Toggle Collapse</button>
-      <ul>
-        <li>
-          <FaHome /> {collapsed ? null : "Home"}
-        </li>
-        <li>
-          <FaUser /> {collapsed ? null : "Profile"}
-        </li>
-        <li>
-          <FaCog /> {collapsed ? null : "Settings"}
-        </li>
-        {/* Add more sidebar items */}
-      </ul>
+    <div className="sidebar-container">
+      <button className={`collapse-button ${collapsed ? "collapsed" : "notCollapsed"}`} onClick={toggleCollapse}>
+        {collapsed ? <FaBars />:<FaTimes />  }
+      </button>
+      <div className={`sidebar ${collapsed ? "collapsed" : ""}`}>
+        <ul>
+          <li>
+            <FaHome /> {collapsed ? null : "Home"}
+          </li>
+          <li>
+            <FaUser /> {collapsed ? null : "Profile"}
+          </li>
+          <li>
+            <FaCog /> {collapsed ? null : "Settings"}
+          </li>
+          {/* Add more sidebar items */}
+        </ul>
+      </div>
     </div>
   );
 };

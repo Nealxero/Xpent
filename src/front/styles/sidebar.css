@@ -1,22 +1,48 @@
-.sidebar {
-    position: fixed;
-    right: 0;
-    top: 0;
-    height: 100vh;
-    width: 300px; /* Adjust the width as needed */
-    background-color: #f1f1f181; /* Set the background color */
-  }
+.sidebar-container {
+  display: flex;
+  position: fixed;
+  right: 0;
+  top: 0;
+}
 
-  .sidebar.collapsed {
-    width: 100px; /* Adjust the collapsed width as needed */
-  }
+.collapse-button {
+  position: fixed;
+  top: 20px; /* Adjust the top position as needed */
+  right: 20px; /* Adjust the left position as needed */
+  z-index: 2;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 40px;
+  color: #000000;
+  transition: transform 0.3s ease;
+  background-color: rgba(255, 255, 255, 0);
+  border-radius: 20%;
+}
+
+.collapse-button.collapsed {
+  transform: rotate(180deg); /* Adjust the distance the button slides with the sidebar */
   
-  .sidebar.collapsed ul {
-    
-  }
-  
-  .sidebar.collapsed button::after {
-    content: '>';
-    /* Add any necessary styling for the collapsed button icon */
-  }
-  
+}
+.collapse-button.notCollapsed {
+  transform:translateX(-140px);
+  top:10px
+}
+
+.sidebar {
+  position: fixed;
+  right: 0;
+  top: 0;
+  height: 100vh;
+  width: 150px; /* Adjust the width as needed */
+  background-color: #f1f1f181; /* Set the background color */
+  transition: transform 0.3s ease;
+  transform: translateX(0%);
+  z-index: 1;
+}
+
+.sidebar.collapsed {
+  width: 100px; /* Adjust the collapsed width as needed */
+  right: 0px; /* Adjust the right position to make it visible */
+  transform: translateX(100%);
+}
