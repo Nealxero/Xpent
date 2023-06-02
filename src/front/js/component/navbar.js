@@ -19,13 +19,15 @@ export const Navbar = () => {
       <div className={`sidebar ${collapsed ? "collapsed" : ""}`}>
         <ul>
           <li>
-            <FaHome /> {collapsed ? null : "Home"}
+            <Link to="/"> <FaHome /> {collapsed ? null : "Home"}</Link>
+            
           </li>
           <li>
-            <FaUser /> {collapsed ? null : "Profile"}
+          <Link to="/SignUp"> <FaUser /> {collapsed ? null : "SignUp"} </Link>
+           
           </li>
           <li>
-            <FaCog /> {collapsed ? null : "Settings"}
+            <Link to="/LogIn"> <FaCog /> {collapsed ? null : "Login"} </Link>
           </li>
           {/* Add more sidebar items */}
         </ul>

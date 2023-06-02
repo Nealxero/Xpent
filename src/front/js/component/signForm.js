@@ -1,98 +1,50 @@
 import React from "react";
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import "../../styles/signup.css";
 
-export const SignUp = () => {
-    const [username, setUsername] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const { store, actions } = useContext(Context);
+
+export const SignUp = () => { 
+
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
   
-    let navigate = useNavigate();
-  
-    const CreateUser = async (e) => {
-      e.preventDefault();
-      const response = await fetch(
-        `${process.env.BACKEND_URL}/api/signup`,
-        {
-          method: "POST",
-          body: JSON.stringify({ "user-name": username, "user-email": email, "user-password": password }),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      const confirmation = await response.json();
-      if (response.status == 200) {
-        navigate("/login");
-      } else {
-        navigate("/login") & alert("Succesfully Created")
-      }
+    const handleEmailChange = (e) => {
+      setEmail(e.target.value);
     };
   
+    const handlePasswordChange = (e) => {
+      setPassword(e.target.value);
+    };
+  
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      // Perform signup logic or API call here
+      console.log('Email:', email);
+      console.log('Password:', password);
+      // Reset form
+      setEmail('');
+      setPassword('');
+    };
+
+  
+  
     return (
-      <>
-      
-      <div  className="container" id="containerLogSign">
-       
-        <div id="card">
+      <div className="signup-container">
+        <h2>Signup</h2>
+        <form onSubmit={handleSubmit}>
+          <label>Email:</label>
+          <input type="email" value={email} onChange={handleEmailChange} />
   
-          <div id="card-content">
-            <div id="card-title">
-              <h2>SIGN UP</h2>
-              <div className="underline-title"></div>
-            </div>
-            <form className="form">
-              <label htmlFor="user-name">Username</label>
-              <input
-                id="user-name"
-                className="form-content"
-                type="text"
-                name="username"
-                autoComplete="off"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                required
-              />
-              <div className="form-border"></div>
-              <label htmlFor="user-email">Email</label>
-              <input
-                id="user-email"
-                className="form-content"
-                type="email"
-                name="email"
-                autoComplete="on"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
-              <div className="form-border"></div>
-              <label htmlFor="user-password">Password</label>
-              <input
-                id="user-password"
-                className="form-content"
-                type="password"
-                name="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
-              <div className="form-border"></div>
+          <label>Password:</label>
+          <input type="password" value={password} onChange={handlePasswordChange} />
   
-              <input
-                id="submit-btn"
-                type="submit"
-                name="submit"
-                value="SIGN UP"
-                onClick={CreateUser}
-              />
-              <p id="signup">
-                <Link to="/login">Already have an account?</Link>
-              </p>
-            </form>
-          </div>
-        </div>
+          <button type="submit">Sign up</button>
+        </form>
+        <p>Already have an account? <Link to="/LogIn">Log In</Link></p>
       </div>
-      
-      </>
     );
   };
   
+
+   
